@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def time_plot(data, group_by, plot_col, labels, x_lab, y_lab, title, fig_size = (15,7.5), ag_function = ['median']):
+def time_plot(x, y, label, title, x_lab, y_lab, fig_size = (15,7.5)):
     '''
     Plots a line plot of plot_col vs group_by.
     data - dataframe
@@ -12,25 +12,14 @@ def time_plot(data, group_by, plot_col, labels, x_lab, y_lab, title, fig_size = 
     '''
     plt.figure(figsize=(fig_size))
     
-    if 'str' in str(type(plot_col)):
-        ag_function = ag_function[0]
-        if ag_function.lower() == 'median':
-            ax = data.groupby(group_by).median()[plot_col].plot(label = labels, legend = True);
-        elif ag_function.lower() == 'count':
-            ax = data.groupby(group_by).count()[plot_col].plot(label = labels, legend = True);
-        else:
-            ax = data.groupby(group_by).mean()[plot_col].plot(label = labels, legend = True);
+    if 'str' in str(type(label)):
+        label = [label]
+        y = [y]
     
-    else:
-        for i in range(len(labels)):
-            if ag_function[i].lower() == 'median':
-                ax = data.groupby(group_by).median()[plot_col[i]].plot(label = labels[i], legend = True);
-            elif ag_function[i].lower() == 'count':
-                ax = data.groupby(group_by).count()[plot_col[i]].plot(label = labels[i], legend = True);
-            else:
-                ax = data.groupby(group_by).mean()[plot_col[i]].plot(label = labels[i], legend = True);
-        
-    ax.set_title(title);
-    ax.set_ylabel(y_lab);
-    ax.set_xlabel(x_lab);
+    for i in range(len(label)):
+        plt.plot(x, y[i], label = label[i]);
+    plt.legend();
+    plt.title(title);
+    plt.ylabel(y_lab);
+    plt.xlabel(x_lab);
     plt.show();
