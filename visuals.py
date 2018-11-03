@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def time_plot(x, y, label, title, x_lab, y_lab, fig_size = (15,7.5)):
+def time_plot(x, y, label, title = None, x_lab = None, y_lab = None, fig_size = (15,7.5)):
     '''
     Plots a line plot of plot_col vs group_by.
     data - dataframe
@@ -19,7 +19,10 @@ def time_plot(x, y, label, title, x_lab, y_lab, fig_size = (15,7.5)):
     for i in range(len(label)):
         plt.plot(x, y[i], label = label[i]);
     plt.legend();
-    plt.title(title);
-    plt.ylabel(y_lab);
-    plt.xlabel(x_lab);
+    if title is not None:
+        plt.title(title);
+    if y_lab is not None:
+        plt.ylabel(y_lab);
+    if x_lab is not None:
+        plt.xlabel(x_lab);
     plt.show();
