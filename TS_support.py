@@ -7,7 +7,7 @@ def get_means(df, group_by, feature):
     # groupby sorts values ascending by 'groupby'
     df_g = df.copy()
     means = df_g.groupby(group_by).mean()[feature].tolist()
-    groups = list(df[group_by].values.unique())
+    groups = list(np.unique(df[group_by].values))
     # sort ascending to match means
     groups.sort()
     return groups, means
@@ -19,7 +19,7 @@ def get_counts(df, group_by, feature):
     # groupby sorts values ascending by 'groupby'
     df_g = df.copy()
     counts = df_g.groupby(group_by).count()[feature].tolist()
-    groups = list(df[group_by].values.unique())
+    groups = list(np.unique(df[group_by].values))
     # sort ascending to match counts
     groups.sort()
     return groups, counts
@@ -30,7 +30,19 @@ def get_medians(df, group_by, feature):
     # groupby sorts values ascending by 'groupby'
     df_g = df.copy()
     medians = df_g.groupby(group_by).median()[feature].tolist()
-    groups = list(df[group_by].values.unique())
+    groups = list(np.unique(df[group_by].values))
     # sort ascending to match medians
     groups.sort()
     return groups, medians
+    
+def get_variance(df, group_by, feature):
+    ''' Returns the unique elements of 'group_by' in df and the variance of each
+    unique element in df. Assumes df is of type pd.DataFrame. 
+    '''
+    # groupby sorts values ascending by 'groupby'
+    df_g = df.copy()
+    variance = df_g.groupby(group_by).var()[feature].tolist()
+    groups = list(np.unique(df[group_by].values))
+    # sort ascending to match medians
+    groups.sort()
+    return groups, variance
