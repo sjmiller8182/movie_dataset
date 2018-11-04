@@ -63,17 +63,23 @@ def _make_reglin_labels(r2, pV, stdE, parms):
         else:
             pass
     return '\n'.join(label)
-    
+
 def scatter(x, y, label = None, title = None, x_lab = None, y_lab = None, add_trend_line = False, line_color = 'r', line_char = None, fig_size = (15,7.5)):
     '''
     Makes a bar chart from positions (pos) and heights. Use labels to replace pos elements.
     '''
     plt.figure(figsize=(fig_size));
     
-    plt.scatter(x, y, label);
+    plt.scatter(x, y, label = label);
     if add_trend_line:
         m, b, r2, pv, std_error = linreg(x,y)
-        plt.plot(x, m * x + b,'-', c = line_color, label = _make_reglin_labels(r2, pv, std_error))
+        lab = ''
+        if line_char is not None:
+            lab = _make_reglin_labels(r2, pv, std_error, line_char)
+        else:
+            lab = None
+        plt.plot(x, m * x + b,'-', c = line_color, label = lab)
+    plt.legend()
     if title is not None:
         plt.title(title);
     if y_lab is not None:
