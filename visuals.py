@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import linregress as linreg
 import numpy as np
 
-def time_plot(x, y, label, title = None, x_lab = None, y_lab = None, fig_size = (15,7.5)):
+def line(x, y, label, title = None, x_lab = None, y_lab = None, fig_size = (15,7.5)):
     '''
     Plots a line plot of plot_col vs group_by.
     data - dataframe
@@ -79,7 +79,8 @@ def scatter(x, y, label = None, title = None, x_lab = None, y_lab = None, add_tr
         else:
             lab = None
         plt.plot(x, m * x + b,'-', c = line_color, label = lab)
-    plt.legend()
+    if (label is not None) and (line_char is not None):
+        plt.legend()
     if title is not None:
         plt.title(title);
     if y_lab is not None:
