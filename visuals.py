@@ -27,7 +27,7 @@ def line(x, y, label, title = None, x_lab = None, y_lab = None, fig_size = (15,7
         plt.xlabel(x_lab);
     plt.show();
     
-def bar(pos, height, labels = None, title = None, x_lab = None, y_lab = None, fig_size = (15,7.5)):
+def bar(pos, height, labels = None, title = None, x_lab = None, y_lab = None, xticks_rot = None, fig_size = (15,7.5)):
     '''
     Makes a bar chart from positions (pos) and heights. Use labels to replace pos elements.
     pos - positions of bars in chart
@@ -35,7 +35,10 @@ def bar(pos, height, labels = None, title = None, x_lab = None, y_lab = None, fi
     labels - labels for position vector
     x_lab, y_lab, title - string
     '''
+    
     plt.figure(figsize=(fig_size));
+    if xticks_rot is not None:
+        plt.xticks(rotation=xticks_rot)
     plt.bar(pos, height);
     if labels is not None:
         plt.xticks(pos,labels);
